@@ -1,7 +1,7 @@
-const CACHE_NAME = 'compteur-jours-pwa-v1';
+const CACHE_NAME = 'compteur-jours-pwa-v2';
 const ASSETS = [
   './',
-  './compteur-jours-pwa.html',
+  './compteur-de-jours.html',
   './manifest.webmanifest',
   './service-worker.js',
   './assets/icon-192.png',
@@ -14,9 +14,7 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
-  );
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))));
   self.clients.claim();
 });
 
@@ -27,6 +25,16 @@ self.addEventListener('fetch', event => {
       const copy = response.clone();
       caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
       return response;
-    }).catch(() => caches.match('./compteur-jours-pwa.html')))
+    }).catch(() => caches.match('./compteur-de-jours.html')))
   );
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  event.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then(windowClients => {
+    for (const client of windowClients) {
+      if ('focus' in client) return client.focus();
+    }
+    if (clients.openWindow) return clients.openWindow('./compteur-de-jours.html');
+  }));
 });

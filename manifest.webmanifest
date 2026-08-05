@@ -1,8 +1,8 @@
 {
   "name": "Compteur de jours",
   "short_name": "Jours",
-  "description": "Calcule le nombre de jours restants entre deux dates.",
-  "start_url": "./compteur-jours-pwa.html",
+  "description": "Application PWA pour enregistrer des événements, suivre les jours restants et recevoir un rappel le jour J.",
+  "start_url": "./compteur-de-jours.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f7f6f2",
@@ -10,17 +10,7 @@
   "lang": "fr",
   "orientation": "portrait-primary",
   "icons": [
-    {
-      "src": "./assets/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./assets/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    { "src": "./assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
